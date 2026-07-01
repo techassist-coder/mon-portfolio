@@ -1,34 +1,16 @@
 /* ============================================================
-   MAIN.JS — Interactions de la page
-   Chargé en bas du <body> pour ne pas bloquer l'affichage
-   du HTML et du CSS pendant le téléchargement du script.
+   MAIN.JS — Interactions communes à toutes les pages
    ============================================================ */
 
-/* --- Menu mobile hamburger ---
-
-   On récupère les éléments du DOM une seule fois
-   et on les stocke dans des variables (plus performant
-   que d'appeler document.querySelector à chaque clic).
-*/
-const toggle = document.querySelector('.nav-toggle');
+/* --- Menu mobile --- */
+const toggle   = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
 if (toggle && navLinks) {
-
     toggle.addEventListener('click', () => {
-
-        /* La classe is-open contrôle la visibilité du menu
-           via CSS (translateX). On évite de modifier le style
-           directement en JS — c'est le CSS qui fait le rendu. */
         const isOpen = navLinks.classList.toggle('is-open');
-
-        /* aria-expanded informe les technologies d'assistance
-           (lecteurs d'écran) que le menu est ouvert ou fermé. */
         toggle.setAttribute('aria-expanded', isOpen);
     });
-
-    /* Ferme le menu si on clique sur un lien de navigation —
-       évite que le menu reste ouvert après avoir changé de section. */
     navLinks.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('is-open');
@@ -37,28 +19,56 @@ if (toggle && navLinks) {
     });
 }
 
-/* --- Ombre de navigation au scroll ---
-
-   On ajoute une ombre à la nav quand la page a scrollé,
-   pour renforcer la séparation visuelle avec le contenu.
-   requestAnimationFrame optimise la performance en
-   synchronisant avec le cycle de rendu du navigateur. */
+/* --- Ombre nav au scroll --- */
 const navWrapper = document.querySelector('.nav-wrapper');
-
 if (navWrapper) {
     let ticking = false;
-
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
-                if (window.scrollY > 20) {
-                    navWrapper.style.boxShadow = '0 4px 32px rgba(0,0,0,0.4)';
-                } else {
-                    navWrapper.style.boxShadow = 'none';
-                }
+                navWrapper.style.boxShadow = window.scrollY > 20
+                    ? '0 4px 32px rgba(0,0,0,0.5)'
+                    : 'none';
                 ticking = false;
             });
             ticking = true;
+        }
+    });
+}
+
+/* --- Formulaire de contact (Netlify Forms)
+   Netlify gère l'envoi côté serveur.
+   On intercepte la soumission en JS pour :
+   1. Masquer le formulaire
+   2. Afficher un message de confirmation
+   Sans ce JS, Netlify redirigerait vers sa page de succès
+   par défaut — moins élégant. --- */
+const form    = document.querySelector('.form');
+const success = document.getElementById('formSuccess');
+
+if (form && success) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault(); /* empêche le rechargement de page par défaut */
+
+        const data = new FormData(form);
+
+        try {
+            /* fetch envoie les données à Netlify en arrière-plan
+               sans quitter la page. */
+            await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data).toString()
+            });
+
+            /* Succès : masque le formulaire, affiche la confirmation */
+            form.style.display    = 'none';
+            success.classList.add('is-visible');
+
+        } catch (err) {
+            /* En cas d'erreur réseau : laisse le formulaire visible
+               et affiche une alerte simple */
+            alert('Une erreur est survenue. Merci de réessayer ou de m\'écrire directement à contact@deskeo-tech.fr');
         }
     });
 }

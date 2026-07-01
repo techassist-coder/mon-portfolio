@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Réalisations Deskeo Tech — projets de refonte et création de sites web.">
+    <title>Réalisations — Deskeo Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <header class="nav-wrapper">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">Deskeo<span class="accent">.</span>Tech</a>
+            <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" role="list">
+                <li><a href="index.html"          class="nav-link">Accueil</a></li>
+                <li><a href="realisations.html"   class="nav-link active">Réalisations</a></li>
+                <li><a href="contact.html"         class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- EN-TÊTE DE PAGE -->
+        <section class="page-hero">
+            <div class="page-hero-bg" aria-hidden="true"></div>
+            <div class="container">
+                <p class="page-hero-eyebrow">Portfolio</p>
+                <h1 class="page-hero-title">
+                    Mes <span class="neon-text">réalisations</span>
+                </h1>
+                <p class="page-hero-desc">Chaque projet est unique. Voici les sites que j'ai conçus, refondus ou optimisés pour mes clients.</p>
+            </div>
+        </section>
+
+        <!-- GRILLE PROJETS -->
+        <section class="section">
+            <div class="container">
+                <div class="projects-grid">
+
+                    <!--
+                        CARTE PROJET TYPE
+                        Structure à dupliquer pour chaque nouveau client.
+                        Remplacer :
+                        - "Projet à venir" par le vrai nom
+                        - les tags par les technos utilisées
+                        - la description
+                        - le href du lien par l'URL du site livré
+                        - project-thumb par une vraie image avec <img>
+                    -->
+                    <article class="project-card">
+                        <div class="project-thumb">
+                            <span class="project-thumb-label">Aperçu à venir</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="tag">Refonte</span>
+                                <span class="tag">HTML / CSS</span>
+                            </div>
+                            <h2 class="project-title">Projet client — Nom à définir</h2>
+                            <p class="project-desc">Description du projet : contexte, problématique du client et solution apportée. Objectif, résultat.</p>
+                            <a href="#" class="project-link">Voir le site →</a>
+                        </div>
+                    </article>
+
+                    <!-- Carte vide — invitation à prendre contact -->
+                    <article class="project-card project-card-empty">
+                        <div>
+                            <p style="font-size:1.8rem; margin-bottom:0.75rem; color: var(--accent);">+</p>
+                            <p>Votre projet pourrait<br>figurer ici</p>
+                            <a href="contact.html" class="btn btn-ghost" style="margin-top:1.25rem; font-size:0.85rem;">Démarrer un projet</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA bas de page -->
+        <section class="section cta-section">
+            <div class="container cta-inner">
+                <div class="cta-neon-bg" aria-hidden="true"></div>
+                <h2 class="cta-title">Votre site mérite mieux</h2>
+                <p class="cta-desc">Parlons de votre projet. Je vous réponds sous 48h avec une première estimation gratuite.</p>
+                <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="nav-logo">Deskeo<span class="accent">.</span>Tech</span>
+            <p class="footer-copy">&copy; 2025 Deskeo Tech — Tous droits réservés</p>
+            <nav aria-label="Navigation secondaire">
+                <a href="contact.html" class="footer-link">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

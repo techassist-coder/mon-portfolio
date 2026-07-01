@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez Deskeo Tech pour votre projet de site web.">
+    <title>Contact — Deskeo Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <header class="nav-wrapper">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">Deskeo<span class="accent">.</span>Tech</a>
+            <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" role="list">
+                <li><a href="index.html"        class="nav-link">Accueil</a></li>
+                <li><a href="realisations.html" class="nav-link">Réalisations</a></li>
+                <li><a href="contact.html"      class="nav-link active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- EN-TÊTE DE PAGE -->
+        <section class="page-hero">
+            <div class="page-hero-bg" aria-hidden="true"></div>
+            <div class="container">
+                <p class="page-hero-eyebrow">Parlons de votre projet</p>
+                <h1 class="page-hero-title">
+                    Prenons <span class="neon-text">contact</span>
+                </h1>
+                <p class="page-hero-desc">Décrivez-moi votre besoin, je reviens vers vous sous 48h avec une première estimation gratuite.</p>
+            </div>
+        </section>
+
+        <!-- FORMULAIRE + INFOS -->
+        <section class="section">
+            <div class="container contact-grid">
+
+                <!-- Colonne gauche : informations -->
+                <div class="contact-info">
+                    <h2 class="contact-info-title">On se parle ?</h2>
+                    <p class="contact-info-desc">Que vous ayez un projet précis ou simplement des questions, n'hésitez pas à m'écrire. Je réponds à tous les messages personnellement.</p>
+
+                    <ul class="contact-items" role="list">
+                        <li class="contact-item">
+                            <div class="contact-item-icon" aria-hidden="true">✉</div>
+                            <div>
+                                <p class="contact-item-label">Email</p>
+                                <p class="contact-item-value">contact@deskeo-tech.fr</p>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-item-icon" aria-hidden="true">⏱</div>
+                            <div>
+                                <p class="contact-item-label">Délai de réponse</p>
+                                <p class="contact-item-value">Sous 48h ouvrées</p>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-item-icon" aria-hidden="true">◎</div>
+                            <div>
+                                <p class="contact-item-label">Zone d'intervention</p>
+                                <p class="contact-item-value">France entière — 100% à distance</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Colonne droite : formulaire
+                     Le formulaire utilise Netlify Forms :
+                     l'attribut data-netlify="true" suffit pour
+                     que Netlify intercepte et stocke les envois.
+                     Aucune base de données, aucun serveur à gérer.
+                     Les soumissions arrivent dans ton dashboard Netlify
+                     et par email. -->
+                <div class="form-wrapper">
+                    <form class="form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+
+                        <!-- Champ honeypot anti-spam : caché visuellement,
+                             les bots le remplissent, Netlify filtre ces envois. -->
+                        <input type="hidden" name="form-name" value="contact">
+                        <p style="display:none">
+                            <label>Ne pas remplir : <input name="bot-field"></label>
+                        </p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="prenom">
+                                    Prénom <span class="required" aria-hidden="true">*</span>
+                                </label>
+                                <input class="form-input" type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Jean">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="nom">
+                                    Nom <span class="required" aria-hidden="true">*</span>
+                                </label>
+                                <input class="form-input" type="text" id="nom" name="nom" required autocomplete="family-name" placeholder="Dupont">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">
+                                Email <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="jean.dupont@exemple.fr">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="sujet">Type de projet</label>
+                            <select class="form-select" id="sujet" name="sujet">
+                                <option value="" disabled selected>Choisir un type de projet</option>
+                                <option value="refonte">Refonte de site existant</option>
+                                <option value="creation">Création de site</option>
+                                <option value="landing">Landing page</option>
+                                <option value="autre">Autre demande</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">
+                                Message <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <textarea class="form-textarea" id="message" name="message" required placeholder="Décrivez votre projet, votre site actuel (si existant), vos objectifs et votre délai souhaité..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit">
+                            Envoyer le message
+                        </button>
+                    </form>
+
+                    <!-- Message affiché après envoi réussi (géré par JS) -->
+                    <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+                        <div class="form-success-icon" aria-hidden="true">✓</div>
+                        <h3 class="form-success-title">Message envoyé !</h3>
+                        <p class="form-success-desc">Merci pour votre message. Je vous réponds sous 48h ouvrées.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="nav-logo">Deskeo<span class="accent">.</span>Tech</span>
+            <p class="footer-copy">&copy; 2025 Deskeo Tech — Tous droits réservés</p>
+            <nav aria-label="Navigation secondaire">
+                <a href="contact.html" class="footer-link">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
