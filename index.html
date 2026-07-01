@@ -3,13 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deskeo Tech — Refonte de sites web et création de landing pages pour professionnels.">
+    <title>Deskeo Tech — Développement & Refonte Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Portfolio — Ton Nom</title>
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
-    <main class="container">
-        <h1>Fabbiati Anthony</h1>
-        <p>Développeur web — refonte de sites et création de landing pages.</p>
+
+    <!-- NAV -->
+    <header class="nav-wrapper">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">Deskeo<span class="accent">.</span>Tech</a>
+            <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" role="list">
+                <li><a href="index.html" class="nav-link active">Accueil</a></li>
+                <li><a href="realisations.html" class="nav-link">Réalisations</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg" aria-hidden="true">
+                <div class="neon-orb orb-1"></div>
+                <div class="neon-orb orb-2"></div>
+                <div class="grid-overlay"></div>
+            </div>
+            <div class="container hero-content">
+                <p class="hero-eyebrow">Développement & Refonte Web</p>
+                <h1 class="hero-title">
+                    Donnez une nouvelle vie<br>
+                    <span class="neon-text">à votre présence en ligne</span>
+                </h1>
+                <p class="hero-desc">Refonte visuelle, création de sites et landing pages pour indépendants et TPE. Des sites rapides, modernes et adaptés à tous les écrans.</p>
+                <div class="hero-actions">
+                    <a href="realisations.html" class="btn btn-primary">Voir les réalisations</a>
+                    <a href="contact.html" class="btn btn-ghost">Me contacter</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section services" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">Ce que je fais</p>
+                    <h2 class="section-title">Des prestations adaptées<br>à vos besoins</h2>
+                </div>
+                <div class="cards-grid">
+                    <article class="card">
+                        <div class="card-icon" aria-hidden="true">⟳</div>
+                        <h3 class="card-title">Refonte visuelle</h3>
+                        <p class="card-desc">Votre site existe mais ne reflète plus votre image. Je le modernise visuellement sans tout reconstruire.</p>
+                    </article>
+                    <article class="card card-featured">
+                        <div class="card-icon" aria-hidden="true">◈</div>
+                        <h3 class="card-title">Création de site</h3>
+                        <p class="card-desc">Vous démarrez de zéro. Je conçois et déploie un site professionnel, rapide et optimisé pour le référencement.</p>
+                        <span class="card-badge">Le plus demandé</span>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon" aria-hidden="true">⤴</div>
+                        <h3 class="card-title">Landing page</h3>
+                        <p class="card-desc">Une page ciblée pour convertir vos visiteurs en clients. Idéale pour un lancement ou une offre spécifique.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- POURQUOI MOI -->
+        <section class="section why">
+            <div class="container why-grid">
+                <div class="why-text">
+                    <p class="section-eyebrow">Pourquoi Deskeo Tech</p>
+                    <h2 class="section-title">Un interlocuteur unique,<br>du brief à la mise en ligne</h2>
+                    <ul class="why-list" role="list">
+                        <li class="why-item">
+                            <span class="why-dot" aria-hidden="true"></span>
+                            <div>
+                                <strong>Méthode en 3 étapes</strong>
+                                <p>Local, pré-production, mise en ligne. Vous validez avant chaque passage en production.</p>
+                            </div>
+                        </li>
+                        <li class="why-item">
+                            <span class="why-dot" aria-hidden="true"></span>
+                            <div>
+                                <strong>Sites optimisés et rapides</strong>
+                                <p>Code propre, images compressées, chargement rapide sur tous les appareils.</p>
+                            </div>
+                        </li>
+                        <li class="why-item">
+                            <span class="why-dot" aria-hidden="true"></span>
+                            <div>
+                                <strong>Accompagnement post-livraison</strong>
+                                <p>Je reste disponible après la mise en ligne pour les ajustements et questions.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="why-visual" aria-hidden="true">
+                    <div class="stats-block">
+                        <div class="stat">
+                            <span class="stat-number neon-text">3</span>
+                            <span class="stat-label">Étapes claires</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <span class="stat-number neon-text">100%</span>
+                            <span class="stat-label">Responsive mobile</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <span class="stat-number neon-text">SSL</span>
+                            <span class="stat-label">Sécurisé HTTPS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container cta-inner">
+                <div class="cta-neon-bg" aria-hidden="true"></div>
+                <h2 class="cta-title">Un projet en tête ?</h2>
+                <p class="cta-desc">Décrivez-moi votre besoin, je vous réponds sous 48h avec une première estimation.</p>
+                <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
+            </div>
+        </section>
+
     </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="nav-logo">Deskeo<span class="accent">.</span>Tech</span>
+            <p class="footer-copy">&copy; 2025 Deskeo Tech — Tous droits réservés</p>
+            <nav aria-label="Navigation secondaire">
+                <a href="contact.html" class="footer-link">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

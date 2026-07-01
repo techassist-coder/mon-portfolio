@@ -1,54 +1,541 @@
-/* Variables : palette, polices, espacements — tout au même endroit */
+/* ============================================================
+   VARIABLES — palette, typo, espacements
+   Tout changer ici se répercute sur tout le site.
+   ============================================================ */
 :root {
-    --color-bg: #ffffff;
-    --color-text: #1a1a1a;
-    --color-muted: #6b7280;
-    --color-accent: #2563eb;
-    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --max-width: 700px;
+    /* Couleurs */
+    --bg:          #0a0a0f;
+    --bg-card:     #111118;
+    --bg-card-alt: #16161f;
+    --border:      rgba(255,255,255,0.07);
+    --border-accent: rgba(139,92,246,0.35);
+
+    --text:        #f0f0f5;
+    --text-muted:  #8888aa;
+    --text-faint:  #44445a;
+
+    --accent:      #8b5cf6;   /* violet néon — changer ici pour refaire toute la charte */
+    --accent-glow: rgba(139,92,246,0.25);
+    --accent-2:    #06b6d4;   /* cyan secondaire */
+
+    /* Typo */
+    --font-body:    'Inter', system-ui, sans-serif;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+
+    /* Espacements */
+    --space-xs:  0.5rem;
+    --space-sm:  1rem;
+    --space-md:  2rem;
+    --space-lg:  4rem;
+    --space-xl:  7rem;
+
+    /* Rayons */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+
+    /* Largeur max du contenu */
+    --max-width: 1100px;
+
+    /* Nav */
+    --nav-h: 68px;
 }
 
-/* Reset de base */
+/* ============================================================
+   RESET
+   Neutralise les styles par défaut des navigateurs.
+   box-sizing: border-box est la règle la plus importante :
+   le padding est inclus dans la largeur, pas ajouté par-dessus.
+   ============================================================ */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: var(--font-base);
-    color: var(--color-text);
-    background: var(--color-bg);
-    line-height: 1.6;
-    padding: 3rem 1.25rem;
+html {
+    scroll-behavior: smooth; /* défilement doux sur les ancres # */
 }
 
-/* Centre le contenu */
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased; /* meilleur rendu des polices sur Mac/iOS */
+    overflow-x: hidden; /* empêche le scroll horizontal accidentel */
+}
+
+img {
+    max-width: 100%;
+    display: block; /* supprime l'espace sous les images (comportement inline par défaut) */
+}
+
+ul { list-style: none; }
+a  { text-decoration: none; color: inherit; }
+
+/* ============================================================
+   UTILITAIRE : CONTAINER
+   Centre le contenu et limite sa largeur sur les grands écrans.
+   Le padding horizontal évite que le texte colle aux bords
+   sur mobile.
+   ============================================================ */
 .container {
+    width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+/* ============================================================
+   NAVIGATION
+   position: fixed maintient la nav visible en scrollant.
+   backdrop-filter crée l'effet de verre dépoli (glassmorphism).
+   z-index élevé garantit qu'elle reste au-dessus de tout.
+   ============================================================ */
+.nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,15,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
-p {
-    color: var(--color-muted);
-    font-size: 1.125rem;
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
-a {
-    color: var(--color-accent);
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
+.nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
-/* Responsive : ce qui change sous 600px (mobile) */
-@media (max-width: 600px) {
-    body { padding: 2rem 1.25rem; }
-    h1 { font-size: 2rem; }
+.accent { color: var(--accent); }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active { color: var(--text); }
+
+/* Bouton hamburger mobile — masqué sur desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ============================================================
+   HERO
+   min-height: 100svh utilise svh (small viewport height) qui
+   exclut la barre d'adresse mobile — plus fiable que vh.
+   padding-top compense la nav fixe.
+   ============================================================ */
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-h);
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* les éléments décoratifs ne captent pas les clics */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.8rem); /* clamp : taille fluide entre min et max */
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+}
+
+/* Texte néon : dégradé + glow via text-shadow */
+.neon-text {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px var(--accent-glow));
+}
+
+.hero-desc {
+    max-width: 540px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: var(--space-md);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   BOUTONS
+   btn-primary : fond violet avec glow au hover.
+   btn-ghost   : contour uniquement, plus discret.
+   transition rend le changement d'état progressif (0.2s).
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+.btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border-color: var(--border);
+}
+.btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+/* ============================================================
+   SECTIONS
+   Chaque section a le même espacement vertical.
+   On le définit une seule fois ici.
+   ============================================================ */
+.section {
+    padding: var(--space-xl) 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   CARDS SERVICES
+   CSS Grid avec auto-fill : les colonnes se créent
+   automatiquement selon la place disponible.
+   minmax(260px, 1fr) : chaque carte fait au moins 260px,
+   et elles se partagent l'espace restant égalitairement.
+   ============================================================ */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-4px); /* légère élévation au survol */
+}
+
+.card-featured {
+    border-color: var(--border-accent);
+    background: var(--bg-card-alt);
+}
+
+.card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.card-badge {
+    position: absolute;
+    top: -12px;
+    right: 1.5rem;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   SECTION WHY
+   Grid 2 colonnes : texte à gauche, stats à droite.
+   gap crée l'espacement entre les colonnes.
+   align-items: center aligne verticalement.
+   ============================================================ */
+.why { background: var(--bg-card); }
+
+.why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-top: 2rem;
+}
+
+.why-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.why-dot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 0.45rem;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.why-item strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.why-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.stats-block {
+    background: var(--bg);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stat { text-align: center; }
+
+.stat-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.stat-divider {
+    height: 1px;
+    background: var(--border);
+}
+
+/* ============================================================
+   CTA SECTION
+   Position relative + z-index pour que le contenu passe
+   devant le fond décoratif (cta-neon-bg).
+   ============================================================ */
+.cta-section { text-align: center; }
+
+.cta-inner {
+    position: relative;
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 5rem 2rem;
+    overflow: hidden;
+}
+
+.cta-neon-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.cta-desc {
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    position: relative;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-copy {
+    font-size: 0.82rem;
+    color: var(--text-faint);
+}
+
+.footer-link {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.footer-link:hover { color: var(--accent); }
+
+/* ============================================================
+   RESPONSIVE MOBILE
+   Les media queries sont en bas : elles écrasent les règles
+   précédentes uniquement sur les petits écrans.
+   Breakpoint 768px = tablette/mobile.
+   ============================================================ */
+@media (max-width: 768px) {
+
+    /* Nav mobile : liens masqués par défaut, toggle visible */
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+        position: fixed;
+        inset: var(--nav-h) 0 0 0;
+        background: rgba(10,10,15,0.97);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 1.2rem;
+
+        /* Masquage accessible : on déplace hors écran plutôt que display:none
+           pour que les lecteurs d'écran puissent quand même le trouver */
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    /* Classe ajoutée par JS quand le menu est ouvert */
+    .nav-links.is-open { transform: translateX(0); }
+
+    /* Grilles : une colonne sur mobile */
+    .why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    .footer-inner { justify-content: center; text-align: center; }
 }
