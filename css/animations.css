@@ -55,20 +55,23 @@
 
 .sparkle {
     position: absolute;
+    width: 2px;
+    height: 10px;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 6px 2px var(--accent-glow), 0 0 14px 4px rgba(199,36,212,0.3);
+    /* dégradé : pointe lumineuse en tête, traînée qui s'estompe derrière */
+    background: linear-gradient(to top, rgba(199,36,212,0) 0%, var(--accent) 55%, #ffe4fa 100%);
+    box-shadow: 0 0 4px 1px var(--accent-glow);
     opacity: 0;
-    animation-name: sparkle-life;
+    transform-origin: center;
+    animation-name: sparkle-fly;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
 
-@keyframes sparkle-life {
-    0%   { opacity: 0; transform: scale(0.3); }
-    15%  { opacity: 1; transform: scale(1); }
-    70%  { opacity: 0.85; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); }
+@keyframes sparkle-fly {
+    0%   { opacity: 0; transform: translate(0, 0) rotate(var(--rot, 0deg)) scaleY(0.3); }
+    18%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--rot, 0deg)) scaleY(1); }
 }
 
 /* Apparition au chargement */

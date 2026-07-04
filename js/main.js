@@ -5,7 +5,7 @@
 /* --- Version du site
    Source unique : ne changer que cette valeur, le footer de
    chaque page se met à jour tout seul au chargement. --- */
-const SITE_VERSION = 'v1.1';
+const SITE_VERSION = 'v1.2';
 
 document.querySelectorAll('.footer-version').forEach(el => {
     el.textContent = SITE_VERSION;
@@ -46,8 +46,10 @@ if (navWrapper) {
 }
 
 /* --- Étincelles animées dans le hero
-   Génération continue de particules magenta à position et durée
-   de vie aléatoires, plafonnée à 10 simultanées pour rester léger. --- */
+   Génération continue de petits points magenta qui filent d'un point
+   de départ vers un point d'arrivée aléatoire (mais proche, pour une
+   trajectoire cohérente), en laissant une légère traînée derrière eux.
+   Plafonnée à 10 simultanées pour rester léger. --- */
 const sparkleContainer = document.querySelector('.hero .sparkles');
 
 if (sparkleContainer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -60,13 +62,21 @@ if (sparkleContainer && !window.matchMedia('(prefers-reduced-motion: reduce)').m
         const sparkle = document.createElement('span');
         sparkle.className = 'sparkle';
 
-        const size     = 3 + Math.random() * 3; /* 3px à 6px */
-        const duration = 1 + Math.random() * 2; /* 1s à 3s */
+        const angle    = Math.random() * Math.PI * 2; /* direction de vol */
+        const distance = 30 + Math.random() * 50;     /* 30px à 80px parcourus */
+        const dx  = Math.cos(angle) * distance;
+        const dy  = Math.sin(angle) * distance;
+        const rot = (angle * 180 / Math.PI) + 90;     /* aligne la traînée sur la trajectoire */
 
-        sparkle.style.left             = `${Math.random() * 100}%`;
-        sparkle.style.top              = `${Math.random() * 100}%`;
-        sparkle.style.width            = `${size}px`;
-        sparkle.style.height           = `${size}px`;
+        const length   = 8 + Math.random() * 6; /* 8px à 14px de long */
+        const duration = 1 + Math.random() * 2;  /* 1s à 3s */
+
+        sparkle.style.left    = `${Math.random() * 100}%`;
+        sparkle.style.top     = `${Math.random() * 100}%`;
+        sparkle.style.height  = `${length}px`;
+        sparkle.style.setProperty('--dx', `${dx}px`);
+        sparkle.style.setProperty('--dy', `${dy}px`);
+        sparkle.style.setProperty('--rot', `${rot}deg`);
         sparkle.style.animationDuration = `${duration}s`;
 
         sparkle.addEventListener('animationend', () => sparkle.remove());
