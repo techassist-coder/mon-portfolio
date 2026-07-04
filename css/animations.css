@@ -45,6 +45,32 @@
     50%       { transform: translateY(-30px) scale(1.05); }
 }
 
+/* Étincelles — générées dynamiquement en JS (main.js), max 10 en simultané */
+.sparkles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px 2px var(--accent-glow), 0 0 14px 4px rgba(199,36,212,0.3);
+    opacity: 0;
+    animation-name: sparkle-life;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes sparkle-life {
+    0%   { opacity: 0; transform: scale(0.3); }
+    15%  { opacity: 1; transform: scale(1); }
+    70%  { opacity: 0.85; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
 /* Apparition au chargement */
 .hero-eyebrow { animation: fadeUp 0.7s ease both; animation-delay: 0.1s; }
 .hero-title   { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }

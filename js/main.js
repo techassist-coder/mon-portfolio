@@ -2,6 +2,15 @@
    MAIN.JS — Interactions communes à toutes les pages
    ============================================================ */
 
+/* --- Version du site
+   Source unique : ne changer que cette valeur, le footer de
+   chaque page se met à jour tout seul au chargement. --- */
+const SITE_VERSION = 'v1.1';
+
+document.querySelectorAll('.footer-version').forEach(el => {
+    el.textContent = SITE_VERSION;
+});
+
 /* --- Menu mobile --- */
 const toggle   = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -34,6 +43,35 @@ if (navWrapper) {
             ticking = true;
         }
     });
+}
+
+/* --- Étincelles animées dans le hero
+   Génération continue de particules magenta à position et durée
+   de vie aléatoires, plafonnée à 10 simultanées pour rester léger. --- */
+const sparkleContainer = document.querySelector('.hero .sparkles');
+
+if (sparkleContainer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const MAX_SPARKLES   = 10;
+    const SPAWN_INTERVAL = 350; /* ms entre chaque tentative d'apparition */
+
+    setInterval(() => {
+        if (sparkleContainer.children.length >= MAX_SPARKLES) return;
+
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle';
+
+        const size     = 3 + Math.random() * 3; /* 3px à 6px */
+        const duration = 1 + Math.random() * 2; /* 1s à 3s */
+
+        sparkle.style.left             = `${Math.random() * 100}%`;
+        sparkle.style.top              = `${Math.random() * 100}%`;
+        sparkle.style.width            = `${size}px`;
+        sparkle.style.height           = `${size}px`;
+        sparkle.style.animationDuration = `${duration}s`;
+
+        sparkle.addEventListener('animationend', () => sparkle.remove());
+        sparkleContainer.appendChild(sparkle);
+    }, SPAWN_INTERVAL);
 }
 
 /* --- Formulaire de contact (Netlify Forms)
